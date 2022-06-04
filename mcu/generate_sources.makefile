@@ -14,6 +14,7 @@ STM32CUBEMX  := $(shell sh -c "find \"$(ECLIPSE_HOME)/plugins\" -name \"STM32Cub
 PRJ_DIR      := $(shell sh -c "pwd")
 JRE_PLUGIN   := $(shell sh -c "find \"$(ECLIPSE_HOME)/plugins\" -name \"com.st.stm32cube.ide.jre.*\" -maxdepth 1 -type d")
 JAVA         := $(JRE_PLUGIN)/jre/bin/java
+BOARD        := $(shell sh -c "cat ./mcu/current")
 
 # the default make in the STM32CubeMX is from 2016, does not support grouped targets
 # if they decide to update make use grouped targets, that solve the issue of copying a template then running the cubemx generator on it. 
@@ -28,12 +29,6 @@ JAVA         := $(JRE_PLUGIN)/jre/bin/java
 	sh -c "cd \"$(PRJ_DIR)/boards/$*/src\"; \"$(JAVA)\" -jar \"$(STM32CUBEMX)\" -q cubemx_gen_script"
 	sh -c "touch ./boards/$*/src/generated"
 
-all : ./boards/KSGER_V1_5/src/generated       \
-	  ./boards/KSGER_V2/src/generated         \
-	  ./boards/KSGER_V3/src/generated         \
-	  ./boards/Quicko_STM32F103/src/generated \
-	  ./boards/Quicko_STM32F072/src/generated ;
-
 clean_% :
 	sh -c "rm -f  ./boards/$*/src/generated"
 	sh -c "rm -rf ./boards/$*/src//EWARM"
@@ -41,7 +36,17 @@ clean_% :
 	sh -c "cd ./boards/$*/src/Core/Src; find . -not -name 'GENERATED_FILES_DO_NOT_MODIFY' -delete"
 	sh -c "cd ./boards/$*/src/Drivers;  find . -not -name 'GENERATED_FILES_DO_NOT_MODIFY' -delete"
 	
-clean : clean_KSGER_V1_5       \
+all : ./boards/$(BOARD)/src/generated;
+
+clean :	clean_$(BOARD);
+
+build_all : ./boards/KSGER_V1_5/src/generated \
+	  ./boards/KSGER_V2/src/generated         \
+	  ./boards/KSGER_V3/src/generated         \
+	  ./boards/Quicko_STM32F103/src/generated \
+	  ./boards/Quicko_STM32F072/src/generated ;
+
+clean_call : clean_KSGER_V1_5  \
 	    clean_KSGER_V2         \
 	    clean_KSGER_V3         \
 	    clean_Quicko_STM32F103 \
