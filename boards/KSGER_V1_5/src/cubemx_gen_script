@@ -1,0 +1,3 @@
+config load KSGER_V1_5.ioc
+project generate ./
+exit

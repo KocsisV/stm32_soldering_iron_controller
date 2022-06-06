@@ -1,0 +1,8 @@
+**/.settings
+**/Core/Inc/*
+**/Core/Src/*
+**/Drivers/*
+**/.mxproject
+**/EWARM/
+!**/GENERATED_FILES_DO_NOT_MODIFY
+generated

@@ -1,3 +1,0 @@
-config load STM32SolderingStation.ioc
-project generate ./
-exit

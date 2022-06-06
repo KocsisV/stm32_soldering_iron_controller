@@ -1,0 +1,3 @@
+config load Quicko_STM32F072.ioc
+project generate ./
+exit
