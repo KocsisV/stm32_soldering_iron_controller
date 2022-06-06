@@ -1753,22 +1753,17 @@
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="KSGER_V3_OLED_Debug"/>
 		<configuration configurationName="Quicko_STM32F072_Debug">
 			<resource resourceType="PROJECT" workspacePath="/STM32SolderingStation"/>
 		</configuration>
-		<configuration configurationName="KSGER_V3_Debug">
-			<resource resourceType="PROJECT" workspacePath="/STM32SolderingStation"/>
-		</configuration>
-		<configuration configurationName="Quicko_STM32F072_Release">
-			<resource resourceType="PROJECT" workspacePath="/STM32SolderingStation"/>
-		</configuration>
+		<configuration configurationName="KSGER_V1_5_OLED_Release"/>
+		<configuration configurationName="KSGER_V3_LCD_Debug"/>
+		<configuration configurationName="Quicko_STM32F072_OLED_Release"/>
 		<configuration configurationName="KSGER_V2_Debug">
 			<resource resourceType="PROJECT" workspacePath="/STM32SolderingStation"/>
 		</configuration>
 		<configuration configurationName="Quicko_STM32F103_Release">
-			<resource resourceType="PROJECT" workspacePath="/STM32SolderingStation"/>
-		</configuration>
-		<configuration configurationName="KSGER_V1_5_Release">
 			<resource resourceType="PROJECT" workspacePath="/STM32SolderingStation"/>
 		</configuration>
 		<configuration configurationName="KSGER_V3_Release">
@@ -1780,16 +1775,39 @@
 		<configuration configurationName="KSGER_V1_5_Debug">
 			<resource resourceType="PROJECT" workspacePath="/STM32SolderingStation"/>
 		</configuration>
+		<configuration configurationName="KSGER_V1_5_OLED_Debug"/>
 		<configuration configurationName="KSGER_V2_Release">
-			<resource resourceType="PROJECT" workspacePath="/STM32SolderingStation"/>
-		</configuration>
-		<configuration configurationName="Quicko_STM32F103_Debug">
 			<resource resourceType="PROJECT" workspacePath="/STM32SolderingStation"/>
 		</configuration>
 		<configuration configurationName="Release">
 			<resource resourceType="PROJECT" workspacePath="/STM32SolderingStation"/>
 		</configuration>
 		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/STM32SolderingStation"/>
+		</configuration>
+		<configuration configurationName="KSGER_V1_5_LCD_Debug"/>
+		<configuration configurationName="Quicko_STM32F072_LCD_Debug"/>
+		<configuration configurationName="Quicko_STM32F072_OLED_Debug"/>
+		<configuration configurationName="Quicko_STM32F103_OLED_Debug"/>
+		<configuration configurationName="Quicko_STM32F103_LCD_Debug"/>
+		<configuration configurationName="KSGER_V2_OLED_Debug"/>
+		<configuration configurationName="KSGER_V3_LCD_Release"/>
+		<configuration configurationName="KSGER_V3_OLED_Release"/>
+		<configuration configurationName="KSGER_V2_OLED_Release"/>
+		<configuration configurationName="KSGER_V3_Debug">
+			<resource resourceType="PROJECT" workspacePath="/STM32SolderingStation"/>
+		</configuration>
+		<configuration configurationName="Quicko_STM32F072_Release">
+			<resource resourceType="PROJECT" workspacePath="/STM32SolderingStation"/>
+		</configuration>
+		<configuration configurationName="Quicko_STM32F103_OLED_Release"/>
+		<configuration configurationName="Quicko_STM32F072_LCD_Release"/>
+		<configuration configurationName="KSGER_V1_5_Release">
+			<resource resourceType="PROJECT" workspacePath="/STM32SolderingStation"/>
+		</configuration>
+		<configuration configurationName="Quicko_STM32F103_LCD_Release"/>
+		<configuration configurationName="KSGER_V1_5_LCD_Release"/>
+		<configuration configurationName="Quicko_STM32F103_Debug">
 			<resource resourceType="PROJECT" workspacePath="/STM32SolderingStation"/>
 		</configuration>
 	</storageModule>
