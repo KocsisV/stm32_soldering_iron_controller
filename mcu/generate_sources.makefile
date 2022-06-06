@@ -25,24 +25,24 @@ JAVA         := $(JRE_PLUGIN)/jre/bin/java
 	sh -c "cp ./mcu/templates/${IT_FILE_$*} ./boards/$*/src/Core/Src/${IT_FILE_$*}"
 	sh -c "cp ./mcu/templates/main.c        ./boards/$*/src/Core/Src/main.c"
 	sh -c "cp ./mcu/templates/main.h        ./boards/$*/src/Core/Inc/main.h"
-	sh -c "cd \"$(PRJ_DIR)/boards/$*/src\"; \"$(JAVA)\" -jar \"$(STM32CUBEMX)\" -q cubemx_gen_script"
+	sh -c "cd \"$(PRJ_DIR)/boards/$*/src\" && \"$(JAVA)\" -jar \"$(STM32CUBEMX)\" -q cubemx_gen_script"
 	sh -c "touch ./boards/$*/src/generated"
 
-all : ./boards/KSGER_V1_5/src/generated       \
-	  ./boards/KSGER_V2/src/generated         \
-	  ./boards/KSGER_V3/src/generated         \
-	  ./boards/Quicko_STM32F103/src/generated \
-	  ./boards/Quicko_STM32F072/src/generated ;
+all : 	./boards/KSGER_V1_5/src/generated       \
+		./boards/KSGER_V2/src/generated         \
+		./boards/KSGER_V3/src/generated         \
+		./boards/Quicko_STM32F103/src/generated \
+		./boards/Quicko_STM32F072/src/generated ;
 
 clean_% :
 	sh -c "rm -f  ./boards/$*/src/generated"
 	sh -c "rm -rf ./boards/$*/src//EWARM"
-	sh -c "cd ./boards/$*/src/Core/Inc; find . -not -name 'GENERATED_FILES_DO_NOT_MODIFY' -delete"
-	sh -c "cd ./boards/$*/src/Core/Src; find . -not -name 'GENERATED_FILES_DO_NOT_MODIFY' -delete"
-	sh -c "cd ./boards/$*/src/Drivers;  find . -not -name 'GENERATED_FILES_DO_NOT_MODIFY' -delete"
-	
-clean : clean_KSGER_V1_5       \
-	    clean_KSGER_V2         \
-	    clean_KSGER_V3         \
-	    clean_Quicko_STM32F103 \
-	    clean_Quicko_STM32F072 ;
+	sh -c "cd ./boards/$*/src/Core/Inc && find . -not -name 'GENERATED_FILES_DO_NOT_MODIFY' -delete"
+	sh -c "cd ./boards/$*/src/Core/Src && find . -not -name 'GENERATED_FILES_DO_NOT_MODIFY' -delete"
+	sh -c "cd ./boards/$*/src/Drivers  && find . -not -name 'GENERATED_FILES_DO_NOT_MODIFY' -delete"
+
+clean :	clean_KSGER_V1_5       \
+		clean_KSGER_V2         \
+		clean_KSGER_V3         \
+		clean_Quicko_STM32F103 \
+		clean_Quicko_STM32F072 ;
