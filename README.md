@@ -51,13 +51,13 @@ The actual requirements are 10KB RAM and 64KB **(\*)** flash.<br>
 
 **CLONES** Some controllers began to put stm32 clones due the chip shortage. CKS32 works well, but CH32F doesn't! Avoid the CH32F, the ADC makes strange things.<br>
 
-The [BOARDS](https://github.com/deividAlfa/stm32_soldering_iron_controller/tree/master/BOARDS) folder has the board code profile, schematics and/or board pictures for quickly identify your hardware.<br>
+The [BOARDS](BOARDS) folder has the board code profile, schematics and/or board pictures for quickly identify your hardware.<br>
 Currently supported controllers (Click to download the latest build):<br>
-* [**Quicko T12-072**](https://github.com/deividAlfa/stm32_soldering_iron_controller/raw/master/BOARDS/Quicko/STM32F072_SSD1306/STM32SolderingStation.bin): For STM32F072 variant.
-* [**Quicko T12-103**](https://github.com/deividAlfa/stm32_soldering_iron_controller/raw/master/BOARDS/Quicko/STM32F103_SSD1306/STM32SolderingStation.bin): For STM32F103 variant.
-* [**KSGER v1.5**](https://github.com/deividAlfa/stm32_soldering_iron_controller/raw/master/BOARDS/KSGER/%5Bv1.5%5D/STM32F103_SSD1306/STM32SolderingStation.bin): Profile for STM32F103 (There are no other known CPUs used in this board).
-* [**KSGER v2.x**, **JCD T12**, **T12-955**](https://github.com/deividAlfa/stm32_soldering_iron_controller/raw/master/BOARDS/KSGER/%5Bv2%5D/STM32F101_SSD1306/STM32SolderingStation.bin): Profile compatible with all STM32F101/2/3xx models.
-* [**KSGER v3.x**, **T12-958**](https://github.com/deividAlfa/stm32_soldering_iron_controller/raw/master/BOARDS/KSGER/%5Bv3%5D/STM32F101_SSD1306/STM32SolderingStation.bin): Profile compatible with all STM32F101/2/3xx models.
+* [**Quicko T12-072**](BOARDS/Quicko/STM32F072_SSD1306/STM32SolderingStation.bin): For STM32F072 variant.
+* [**Quicko T12-103**](BOARDS/Quicko/STM32F103_SSD1306/STM32SolderingStation.bin): For STM32F103 variant.
+* [**KSGER v1.5**](BOARDS/KSGER/%5Bv1.5%5D/STM32F103_SSD1306/STM32SolderingStation.bin): Profile for STM32F103 (There are no other known CPUs used in this board).
+* [**KSGER v2.x**, **JCD T12**, **T12-955**](BOARDS/KSGER/%5Bv2%5D/STM32F101_SSD1306/STM32SolderingStation.bin): Profile compatible with all STM32F101/2/3xx models.
+* [**KSGER v3.x**, **T12-958**](BOARDS/KSGER/%5Bv3%5D/STM32F101_SSD1306/STM32SolderingStation.bin): Profile compatible with all STM32F101/2/3xx models.
 
 For KSGER v2/v3: As long as use the correct firmware, any STM32 variant (101/102/103/C8/R8/CB/RB) will work.<br>
 
@@ -66,7 +66,7 @@ Actually, the easiest way to quickly identify your KGSER version is by looking a
 - **6 pin** (SPI) = v3.x<br>
 
 Also keep in mind that you can't trust the version shown in the original firmware to identify your board.<br>
-Go to [BOARDS](https://github.com/deividAlfa/stm32_soldering_iron_controller/tree/master/BOARDS)/... schematics folder and compare the pictures.<br>
+Go to [BOARDS](BOARDS)/... schematics folder and compare the pictures.<br>
 There are several compatible/cloned boards in the market that will work fine with Ksger profiles.<br>
 
 T12-951, T12-952, T12-956, T12-959 use STC mcu, not supported by this firmware.<br>
@@ -83,7 +83,7 @@ First, make sure to read the [Operating instructions](Readme_files/Operation.md)
 You can check the [commit history](https://github.com/deividAlfa/stm32_soldering_iron_controller/commits/master) to see what have been changed between builds.
 
 ### Backing up the original firmware
-The original firmwares are available [[HERE]](https://github.com/deividAlfa/stm32_soldering_iron_controller/tree/master/Original_FW)<br>
+The original firmwares are available [[HERE]](Original_FW)<br>
 Some KSGER firmwares require an activation code which can be generated [[HERE]](http://t12.omegahg.com/keygen.htm)  [[Alternative link]](https://rawcdn.githack.com/deividAlfa/stm32_soldering_iron_controller/3f48a9c4c9586f89503ce763b1c6a73b9b73b55a/Original_FW/KSGER/Gen/gen.htm)<br>
 
 Be warned, usually the MCU will be read-protected, so you won't be able to read its contents, only erase it.<br> 
@@ -154,51 +154,82 @@ https://www.eevblog.com/forum/reviews/stm32-oled-digital-soldering-station-for-t
 
 ---
 
-<a id="build"></a>     
+<a id="build"></a>
 ## Building the firmware
 
-Video of building steps:<br>
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/8oeGVSSxudk/0.jpg)](https://www.youtube.com/watch?v=8oeGVSSxudk "Firmware build")<br><br>
+To build the firmware follow the steps below:
 
-There's a new automated build script for Windows (_Building_script.bat) that allows a simple and fast way of copying and building the desired profile.<br>
-With it, all you need is to have CubeIDE installed in C:\ST... (It's the default installation folder), it will search and execute the tools without requiring any user intervention.<br>
-Just open it, choose your profile, and if you want to build it or not.<br>
-The compiled binaries will be placed in their respective BOARDS/... folders.<br><br>
+- Install STM32CubeIDE. The installer can be downloaded from [ST's site](https://www.st.com/en/development-tools/stm32cubeide.html) (registration required). Version 1.9.0 is tested and known to work.
+- Clone the repository or download the [current snapshot](archive/refs/heads/master.zip).
+- Open STM32CubeIDE and import the project (with one of the following methods):
+  - Either in the project explorer tab click on the *Import projects...* or in the *C/C++ Projects* right click and choose *Import*.
+  - Select *General/Existing Projects into Workspace*, click *Next*.<br>
+    ![build_import_step_1](Readme_files/build_import_step_1.png)
+  - Select the root directory to where you have cloned/downloaded the repository.
+  - The *Search for nested projects* option should be checked (not mandatory but it is recommended).<br>
+    ![build_import_step_1](Readme_files/build_import_step_2.png)
+  - Click *Finish*. Now the project is loaded into your current workspace.
+- Select the project by simply clicking on it either in the *Project Explorer*: <br>
+  ![build_import_step_1](Readme_files/build_import_step_3.png)
+- If you are on linux/macos (**skip this step if you are using windows**):
+  - Right click on the *STM32SolderingStation* project, select *Properties*.
+  - Select the *Builders* on the left side.
+  - Click on *CodeGen* builder, then on the right side click *Edit...*.
+  - Modify the *Location* to "${stm32cubeide_make_path}/bin/make".
+  - Click *Ok* then *Apply and Close*.
+  - Repeat this for the *Clean* builder.<br/>
+    ![build_import_step_1](Readme_files/build_import_step_linux.png)
+- Click on the small down arrow next to the build icon and select the configuration you want to build. Pick the *Release* configuration of your target hardware.<br>
+  ![build_import_step_1](Readme_files/build_import_step_4.png)<br>
+  It may ask you to download libraries, download them. It may take a while to compile the first time. The resulting binaries will be placed into a new folder in the project named after the configuration as a *.bin* file, and also into the *binaries* folder.
 
-If you want to build your own, clone or download the source.<br>
-The source is stripped from ST own libraries and unnecesary stuff, only includes the very basic code owning to the project.<br>
-CubeMX will add the STM32 and CMSIS libraries automatically after a code generation.<br>
-Open the [BOARDS](https://github.com/deividAlfa/stm32_soldering_iron_controller/tree/master/BOARDS) folder, find your board (or take any to work with) and copy all the contents to the root of the project.<br><br>
-Open STM32CUBE IDE, click on Import/Existing project and select the project folder.<br>
-Important: Disable "Search for nested projects", select only the project in the root of the folder.<br>
-After that, double-click on [STM32SolderingStation.ioc] file:<br>
-<img src="/Readme_files/open_ioc.png?raw=true"><br><br>
-CubeMX will open, then click on generate code:<br>
-<img src="/Readme_files/gen.png?raw=true"><br><br>
-After this, it'll be ready for compiling, click in the right arrow of the build button (Hammer icon) and select [Release]:<br>
-<img src="/Readme_files/release.jpg?raw=true"><br><br>
-After a while you'll have the compiled bin/hex files inside Release folder.<br><br>
-If the build fails with files no found or undeclared functions errors, check the Include search path:<br>
-Right click on project -> [Properties] -> [C/C++ Build] -> [Settings] ->  [Tool Settings] -> [MCU GCC Compiler] -> [Include paths]<br>
-Select [All configurations] in [Configuration] dropdown menu.<br>
-Now ensure these are present:<br>
+## Project structure
 
-      /Core/Inc
-      /Core/Src
-      /Drivers/generalIO
-      /Drivers/graphics
-      /Drivers/graphics/gui
-      /Drivers/graphics/gui/screens
-      /Drivers/graphics/u8g2
-      /Drivers/STM32Fxxx_HAL_Driver/Inc
-      /Drivers/STM32Fxxx_HAL_Driver/Inc/Legacy
-      /Drivers/CMSIS/Device/ST/STM32Fxxx/Include
-      /Drivers/CMSIS/Include
-      
-(STM32Fxxx matches your current mcu family, ex. STM32F0xx, STM32F1xx)<br><br>
-If any is missing, click on Add... Select Workspace and select the missing ones.<br>
-You can make multiple selection  while holding the Control key:<br>      
-<img src="/Readme_files/Includes.jpg?raw=true">
+The repository contains multiple projects. The main project is the *STM32SolderingStation* containing non hardware specific code. Inside the *boards* folder there is one sub-project for each hardware target.
+
+### Hardware targets
+
+Hardware targets are what tailors the main project to suit the given hardware. Each hardware target has its own project. Don't confuse hardware targets and configurations (explained later)! These projects hold the IOC file which contains the peripheral and driver configurations. The IDE generates code from this, and automatically copies the required dependencies to the project. These hardware projects are not what actually compiles the final binary.<br>
+*Technical note: These projects only exist for convenience reasons. The STM32CubeIDE only allows opening the IOC files if they are placed to the project's root and have the same name as the project itself.*
+
+To edit a hardware configuration, simply open the IOC file and do your modifications to the given board layout.<br>
+![build_import_step_1](Readme_files/ioc.png)<br>
+It is not required to generate the code when saving the IOC file, the code generation will be executed automatically.
+
+To add an entirely new hardware target follow the steps below (and also follow the steps to add a new configuration described in the *main project* section):
+
+- Duplicate one of the folders from the *boards* folder and rename it with the new hardware target's name (don't use spaces in the name, and the name is case sensitive).
+- Rename the IOC file (in the src folder) to the same name (case sensitive!) as the board name.
+- If you target a new not previously supported controller
+  - Add a folder with the controller's name into the *(repository)/mcu* folder with the linker script and the startup file.
+  - Add the interrupt handler template to the *(repository)/mcu/templates* folder.
+- Add your new board's name (case sensitive!) to the makefile which generates the sources. Open the *(repository)/mcu/generate_sources.makefile* file and add your new target to it:
+  - Add "./boards/XXX/src/generated" to the "all" target where XXX is your new board's name
+  - Add "clean_XXX" to the "clean" target.
+  - Add a new *IT_FILE_XXX* variable with the interrupt handler template filename.
+
+- Optionally if you want to conveniently edit the IOC file (you can also edit directly it via STM32CubeMX)
+  - Open the .project file inside your new board's folder with a text editor and change the name of the project to the new board name. Simply replace what's within the *\<name\>* node.
+  - Open the .cproject file with a text editor and with find & replace replace all occurrences of the old board name with the new one.
+  - If you want to target a different microcontroller than the board what you just copied you have to change it in the cproject file. It is not possible to change this in the IDE, you will have to do this manually in the file. Search and replace for example "STM32F103" with your new controller's name.
+  - Import the new project the same way as described in the [build](#build) section.
+- Open the *cubemx_gen_script* file in your board folder and change the IOC file name to match your board's name.
+- Open the IOC file with a text editor and search and replace the board name there too.
+- Make your changes to the IOC file, change the target MCU, etc...
+
+During code generation (when building from the main project) the main.h, main.c, \*_it.c and the startup_\*.s files are taken from the *mcu* folder and the IDE uses those as a template. If one of those files change or the IOC file changes the code generation is re-run automatically during the build.<br>
+The build configurations in the hardware target projects are not used.
+
+The repository does not contain the generated code, nor any ST library. These will be added during code generation. The code generation is automatically invoked via a custom builder from the main project.
+
+### Main project
+
+TODO
+
+### Build configurations in the main project
+
+TODO
+
 
 At some point, the firmware might not fit into the flash when compiling for debugging, as it'll skip optimizations, and use much more space.<br>
 In that case, you'll need to force some optimization level, starting with "Optimize for debug" (Og), and going to higher levels if still being too big (O1,O2,Osize).<br>
